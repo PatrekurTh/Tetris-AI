@@ -5,7 +5,7 @@ import numpy as np
 import pyautogui as pyg
 from build2.Release.agents import Action, call_agent_get_best_move, MCTSAgent, NAgent
 
-pyg.PAUSE = 0.005 #! If your computer/network is slow, increase this value. If it's fast, set to 0
+pyg.PAUSE = 0.0 #! If your computer/network is slow, increase this value. If it's fast, set to 0
 
 END_COLOR = np.array([130, 130, 130])
 BOARD_COLOR = np.array([57, 57, 57])

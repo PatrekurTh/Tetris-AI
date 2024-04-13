@@ -2,7 +2,7 @@
 
 mkdir -p build2
 
-cd build2 || exit
+cd build2
 
 cmake ..
 
