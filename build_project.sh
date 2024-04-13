@@ -4,7 +4,7 @@ mkdir -p build2
 
 cd build2
 
-cmake ..
+cmake -DCMAKE_BUILD_TYPE=Release ..
 
 cmake --build . --config Release
 

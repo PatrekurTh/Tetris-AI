@@ -3,58 +3,59 @@ from time import sleep
 from utils.window_capture import WindowCapture
 import numpy as np
 import pyautogui as pyg
-from build2.Release.agents import Action, call_agent_get_best_move, MCTSAgent, NAgent
+from sys import argv
+from build2.bin.agents import Action, call_agent_get_best_move, MCTSAgent, NAgent
 
 pyg.PAUSE = 0.0 #! If your computer/network is slow, increase this value. If it's fast, set to 0
 
-END_COLOR = np.array([130, 130, 130])
-BOARD_COLOR = np.array([57, 57, 57])
+END_COLOR = np.array([130, 130, 130]) # Color of pieces when game ends
+BOARD_COLOR = np.array([57, 57, 57]) # Color of the frame surrounding the board
 
-# MAC (BGR)
-# PIECE_COLORS = {
-#     "I": [190, 158, 110],
-#     "J": [187, 99, 95],
-#     "L": [101, 140, 185],
-#     "O": [108, 193, 193],
-#     "S": [106, 191, 129],
-#     "T": [188, 98, 167],
-#     "Z": [110, 89, 203],
-#     "TRASH": [187, 187, 187]
-# }
-
-# WINDOWS (BGR)
-PIECE_COLORS = {
-    "I": [193, 160, 94],
-    "J": [193, 99, 94],
-    "L": [94, 138, 193],
-    "O": [94, 193, 193],
-    "S": [94, 193, 109],
-    "T": [193, 94, 178],
-    "Z": [109, 79, 219],
-    "TRASH": [187, 187, 187]
-}
-
-# MAC
-# BUTTONS = {
-#     Action.LEFT: "left",
-#     Action.RIGHT: "right",
-#     Action.CCW: "s", # Rotate left
-#     Action.CW: "d", # Rotate right
-#     Action.HOLD: "a",
-#     Action.NONE: "down",
-#     "DROP": "space",
-# }
-
-# WINDOWS
-BUTTONS = {
-    Action.LEFT: "j",
-    Action.RIGHT: "l",
-    Action.CCW: "s", # Rotate left
-    Action.CW: "d", # Rotate right
-    Action.HOLD: "a",
-    Action.NONE: "k",
-    "DROP": "space",
-}
+if (len(argv) > 1):
+    if (argv[1] == "mac"):
+        PIECE_COLORS = {
+            "I": [190, 158, 110],
+            "J": [187, 99, 95],
+            "L": [101, 140, 185],
+            "O": [108, 193, 193],
+            "S": [106, 191, 129],
+            "T": [188, 98, 167],
+            "Z": [110, 89, 203],
+            "TRASH": [187, 187, 187]
+        }
+        BUTTONS = {
+            Action.LEFT: "left",
+            Action.RIGHT: "right",
+            Action.CCW: "s", # Rotate left
+            Action.CW: "d", # Rotate right
+            Action.HOLD: "a",
+            Action.NONE: "down",
+            "DROP": "space",
+        }
+    elif (argv[1] == "windows"):
+        PIECE_COLORS = {
+            "I": [193, 160, 94],
+            "J": [193, 99, 94],
+            "L": [94, 138, 193],
+            "O": [94, 193, 193],
+            "S": [94, 193, 109],
+            "T": [193, 94, 178],
+            "Z": [109, 79, 219],
+            "TRASH": [187, 187, 187]
+        }
+        BUTTONS = {
+            Action.LEFT: "j",
+            Action.RIGHT: "l",
+            Action.CCW: "s", # Rotate left
+            Action.CW: "d", # Rotate right
+            Action.HOLD: "a",
+            Action.NONE: "k",
+            "DROP": "space",
+        }
+else:
+    print("Usage: python game_server.py <platform>")
+    print("Platforms: mac, windows")
+    exit(1)
 
 def set_current_piece(screenshot, board_x, board_y, block_width, block_height):
     top_area_height = block_height
@@ -245,5 +246,5 @@ def main(agent):
 
 
 if __name__ == "__main__":
-    agent = NAgent(2)
+    agent = NAgent(2) #! Change this to the agent you want to use
     main(agent)
