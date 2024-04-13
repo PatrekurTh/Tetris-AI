@@ -8,7 +8,14 @@ find_package(pybind11 CONFIG REQUIRED)
 
 set(CMAKE_CXX_STANDARD 11)
 
-pybind11_add_module(agents agents.cpp MCTSAgent.cpp Environment.cpp NAgent.cpp)
+include_directories("${CMAKE_SOURCE_DIR}/headers")
+
+pybind11_add_module(agents 
+    src/agents.cpp 
+    src/MCTSAgent.cpp 
+    src/Environment.cpp 
+    src/NAgent.cpp
+)
 
 set_target_properties(agents PROPERTIES
         CXX_STANDARD 11

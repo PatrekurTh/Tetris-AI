@@ -1,6 +1,6 @@
 import cv2 as cv
 from time import sleep
-from window_capture import WindowCapture
+from utils.window_capture import WindowCapture
 import numpy as np
 import pyautogui as pyg
 from build2.Release.agents import Action, call_agent_get_best_move, MCTSAgent, NAgent

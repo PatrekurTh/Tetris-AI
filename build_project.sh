@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir build2
+mkdir -p build2
 
 cd build2 || exit
 
